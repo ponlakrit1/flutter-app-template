@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/features/auth/login/login_screen.dart';
+import 'package:flutter_app_template/features/auth/login/pages/login_screen.dart';
 import 'package:flutter_app_template/features/home/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
