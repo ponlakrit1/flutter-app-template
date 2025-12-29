@@ -29,9 +29,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
     if (mounted) {
       if (token) {
-        context.pushReplacementNamed(HomeScreen.routeName);
+        context.goNamed(HomeScreen.routeName);
       } else {
-        context.pushReplacementNamed(LoginScreen.routeName);
+        context.goNamed(LoginScreen.routeName);
       }
     }
   }

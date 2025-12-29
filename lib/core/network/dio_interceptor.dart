@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_app_template/core/di/injector.dart';
 import 'package:flutter_app_template/core/utils/environment.dart';
 import 'package:flutter_app_template/core/utils/secure_storage_helper.dart';
+import 'package:flutter_app_template/features/auth/pages/login_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class DioInterceptor extends Interceptor {
   SecureStorageHelper tokenStorage = injector<SecureStorageHelper>();
@@ -39,8 +41,9 @@ class DioInterceptor extends Interceptor {
           baseUrl: env.baseUrl,
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ${tokenStorage.getRefreshToken()}',
+            'Authorization': 'Bearer ${await tokenStorage.getRefreshToken()}',
           },
+          validateStatus: (status) => true,
         ),
       );
 
@@ -51,6 +54,8 @@ class DioInterceptor extends Interceptor {
           accessToken: refreshTokenResponse.data['access_token'],
           refreshToken: refreshTokenResponse.data['refresh_token'],
         );
+
+        print("Now refresh token ...");
 
         RequestOptions options = err.requestOptions;
         options.headers[HttpHeaders.authorizationHeader] =
@@ -71,10 +76,20 @@ class DioInterceptor extends Interceptor {
         } on DioException catch (error) {
           handler.reject(error);
         }
+      } else if (refreshTokenResponse.statusCode == HttpStatus.unauthorized) {
+        await tokenStorage.clear();
+
+        // Redirect login screen
+        injector<GoRouter>().routerDelegate.navigatorKey.currentContext
+            ?.goNamed(LoginScreen.routeName);
       }
     } else if (err.response?.statusCode == HttpStatus.forbidden) {
+      await tokenStorage.clear();
+
       // Redirect login screen
-      handler.reject(err);
+      injector<GoRouter>().routerDelegate.navigatorKey.currentContext?.goNamed(
+        LoginScreen.routeName,
+      );
     } else {
       handler.reject(err);
     }

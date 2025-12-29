@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       if (mounted && success) {
-        context.pushReplacementNamed(HomeScreen.routeName);
+        context.goNamed(HomeScreen.routeName);
       }
     } catch (e) {
       print(e);

@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/di/injector.dart';
+import 'package:flutter_app_template/core/models/auth/user_profile_model.dart';
 import 'package:flutter_app_template/core/services/auth_service.dart';
 
-class LoginProvider extends ChangeNotifier {
+class HomeProvider extends ChangeNotifier {
   final AuthService _authService = injector<AuthService>();
 
-  LoginProvider();
+  HomeProvider();
+
+  UserProfileModel? profile;
 
   bool isLoading = false;
 
-  Future<bool> login(String username, String password) async {
+  Future<void> getProfile() async {
     try {
       isLoading = true;
+      profile = await _authService.profile();
+
       notifyListeners();
-
-      await _authService.login(username, password);
-
-      return true;
     } catch (e) {
       print(e);
-      return false;
     } finally {
       isLoading = false;
       notifyListeners();

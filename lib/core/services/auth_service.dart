@@ -33,7 +33,7 @@ class AuthService {
   }
 
   Future<UserProfileModel> profile() async {
-    final response = await dio.post('/api/auth/profile');
+    final response = await dio.get('/api/auth/profile');
 
     if (response.statusCode == HttpStatus.ok) {
       return UserProfileModel.fromJson(response.data);

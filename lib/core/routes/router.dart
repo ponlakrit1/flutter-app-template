@@ -3,14 +3,15 @@ import 'package:flutter_app_template/features/auth/pages/login_screen.dart';
 import 'package:flutter_app_template/features/auth/pages/splash_screen.dart';
 import 'package:flutter_app_template/features/auth/providers/login_provider.dart';
 import 'package:flutter_app_template/features/home/pages/home_screen.dart';
+import 'package:flutter_app_template/features/home/providers/home_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(
-  initialLocation: LoginScreen.routeName,
-  navigatorKey: _rootNavigatorKey,
+  initialLocation: SplashScreen.routeName,
+  navigatorKey: rootNavigatorKey,
   routes: <RouteBase>[
     GoRoute(
       name: SplashScreen.routeName,
@@ -33,7 +34,10 @@ final GoRouter router = GoRouter(
       name: HomeScreen.routeName,
       path: HomeScreen.routeName,
       builder: (BuildContext context, GoRouterState state) {
-        return const HomeScreen();
+        return ChangeNotifierProvider(
+          create: (_) => HomeProvider()..getProfile(),
+          child: const HomeScreen(),
+        );
       },
     ),
   ],
