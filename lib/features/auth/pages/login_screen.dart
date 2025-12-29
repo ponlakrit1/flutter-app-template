@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/theme/app_color.dart';
-import 'package:flutter_app_template/features/auth/login/providers/login_provider.dart';
-import 'package:flutter_app_template/features/home/home_screen.dart';
+import 'package:flutter_app_template/features/auth/providers/login_provider.dart';
+import 'package:flutter_app_template/features/home/pages/home_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 

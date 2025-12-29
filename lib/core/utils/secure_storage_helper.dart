@@ -24,6 +24,16 @@ class SecureStorageHelper {
     return storage.read(key: _refreshToken);
   }
 
+  Future<bool> hasValidToken() async {
+    final token = await storage.read(key: _accessToken);
+
+    if (token == null || token.isEmpty) {
+      return false;
+    }
+
+    return true;
+  }
+
   Future<void> clear() async {
     await storage.deleteAll();
   }

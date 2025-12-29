@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_app_template/core/error/exceptions.dart';
 import 'package:flutter_app_template/core/models/auth/user_auth_model.dart';
+import 'package:flutter_app_template/core/models/auth/user_profile_model.dart';
 import 'package:flutter_app_template/core/utils/secure_storage_helper.dart';
 
 class AuthService {
@@ -26,6 +27,16 @@ class AuthService {
       );
 
       return userAuth;
+    } else {
+      throw ServerException();
+    }
+  }
+
+  Future<UserProfileModel> profile() async {
+    final response = await dio.post('/api/auth/profile');
+
+    if (response.statusCode == HttpStatus.ok) {
+      return UserProfileModel.fromJson(response.data);
     } else {
       throw ServerException();
     }
