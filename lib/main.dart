@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Flutter App Template',
       theme: AppTheme.defaultTheme,
+      debugShowCheckedModeBanner: false,
       routeInformationProvider: router.routeInformationProvider,
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_template/core/di/injector.dart';
 import 'package:flutter_app_template/core/services/auth_service.dart';
 
 class LoginProvider extends ChangeNotifier {
-  final AuthService _authService = injector<AuthService>();
+  final AuthService authService;
 
-  LoginProvider();
+  LoginProvider({required this.authService});
 
   bool isLoading = false;
 
@@ -14,7 +13,7 @@ class LoginProvider extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
 
-      await _authService.login(username, password);
+      await authService.login(username, password);
 
       return true;
     } catch (e) {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_template/core/di/injector.dart';
+import 'package:flutter_app_template/core/services/auth_service.dart';
 import 'package:flutter_app_template/features/auth/pages/login_screen.dart';
 import 'package:flutter_app_template/features/auth/pages/splash_screen.dart';
 import 'package:flutter_app_template/features/auth/providers/login_provider.dart';
@@ -25,7 +27,7 @@ final GoRouter router = GoRouter(
       path: LoginScreen.routeName,
       builder: (BuildContext context, GoRouterState state) {
         return ChangeNotifierProvider(
-          create: (_) => LoginProvider(),
+          create: (_) => LoginProvider(authService: injector<AuthService>()),
           child: const LoginScreen(),
         );
       },
@@ -35,7 +37,8 @@ final GoRouter router = GoRouter(
       path: HomeScreen.routeName,
       builder: (BuildContext context, GoRouterState state) {
         return ChangeNotifierProvider(
-          create: (_) => HomeProvider()..getProfile(),
+          create: (_) =>
+              HomeProvider(authService: injector<AuthService>())..getProfile(),
           child: const HomeScreen(),
         );
       },
