@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_template/core/theme/app_color.dart';
+import 'package:flutter_app_template/features/auth/login/providers/login_provider.dart';
+import 'package:flutter_app_template/features/home/home_screen.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/login';
@@ -11,6 +15,26 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  Future<void> _onLogin() async {
+    try {
+      final auth = context.read<LoginProvider>();
+
+      final success = await auth.login(
+        _usernameController.text,
+        _passwordController.text,
+      );
+
+      if (mounted && success) {
+        context.pushReplacementNamed(HomeScreen.routeName);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 32),
               TextField(
+                controller: _usernameController,
                 decoration: InputDecoration(
                   labelText: 'Username',
                   prefixIcon: const Icon(Icons.account_circle_outlined),
@@ -44,6 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 16),
               TextField(
+                controller: _passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
@@ -58,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: MediaQuery.of(context).size.width,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => _onLogin(),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.primary,
                     shape: RoundedRectangleBorder(
