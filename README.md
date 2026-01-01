@@ -1,16 +1,40 @@
-# flutter_app_template
+# Flutter App Template
 
-A new Flutter project.
+This Flutter starter is maintained by the Nxtype team.
 
-## Getting Started
+## 🛠 Tech Stack
 
-This project is a starting point for a Flutter application.
+- **Framework:** [Flutter](https://flutter.dev) (v3.x.x)
+- **State Management:** [Provider]
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Getting Started
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Follow these instructions to get a copy of the project up and running on your local machine.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Prerequisites
+
+- Flutter SDK (latest stable version)
+- Android Studio / Xcode
+- VS Code (Optional but recommended)
+
+## 💻 Commands
+
+### Install dependencies
+
+```sh
+flutter pub get
+```
+
+### Run code generation
+
+```sh
+# ℹ️ If using build_runner
+
+flutter pub run build_runner build
+```
+
+### Run the app
+
+```sh
+flutter run
+```
