@@ -62,3 +62,11 @@ dev_dependencies:
 flutter:
   assets:
     - .env
+  fonts:
+  - family: NotoSansThais
+    fonts:
+      - asset: assets/fonts/NotoSansThai-Regular.ttf
+      - asset: assets/fonts/NotoSansThai-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/NotoSansThai-SemiBold.ttf
+        weight: 600
