@@ -25,6 +25,15 @@ Follow these instructions to get a copy of the project up and running on your lo
 flutter pub get
 ```
 
+### Change package name
+
+```sh
+flutter pub run rename \
+  --android com.nxtypetech.myapp \
+  --ios com.nxtypetech.myapp \
+  --appname "My App"
+```
+
 ### Run code generation
 
 ```sh
