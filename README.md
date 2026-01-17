@@ -11,6 +11,12 @@ This Flutter starter is maintained by the Nxtype team.
 
 Follow these instructions to get a copy of the project up and running on your local machine.
 
+### Clone project
+
+```sh
+git clone https://github.com/ponlakrit1/flutter-app-template new-repo-name
+```
+
 ### Prerequisites
 
 - Flutter SDK (latest stable version)
@@ -28,10 +34,9 @@ flutter pub get
 ### Change package name
 
 ```sh
-flutter pub run rename \
-  --android com.nxtypetech.myapp \
-  --ios com.nxtypetech.myapp \
-  --appname "My App"
+dart run rename setAppName --value "My App"
+
+dart run rename setBundleId --value com.nxtypetech.myapp
 ```
 
 ### Run code generation
